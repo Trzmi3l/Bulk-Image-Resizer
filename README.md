@@ -16,5 +16,8 @@
 * ONLY WINDOWS
 * .net 8
 
+# Download
+* [Here](https://github.com/Trzmi3l/Bulk-Image-Resizer/releases/tag/v1.0)
+
 # Authors
 * [Kamil Keameleek Marzenowski](https://github.com/Trzmi3l)
