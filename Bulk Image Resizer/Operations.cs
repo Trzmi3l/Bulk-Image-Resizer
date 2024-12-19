@@ -17,7 +17,6 @@ namespace Bulk_Image_Resizer
                 int length = files.Length;
                 string[] newPaths = new string[length];
 
-                // Generujemy nowe nazwy plików (docelowe numery)
                 for (int i = 0; i < length; i++)
                 {
                     string directory = Path.GetDirectoryName(files[i]);
@@ -25,18 +24,18 @@ namespace Bulk_Image_Resizer
                     newPaths[i] = Path.Combine(directory, $"{i+min}{extension}");
                 }
 
-                // Zmieniamy nazwy plików w odwrotnej kolejności
+
                 for (int i = length - 1; i >= 0; i--)
                 {
-                    if (!File.Exists(files[i])) continue; // Pomijamy brakujące pliki
+                    if (!File.Exists(files[i])) continue; 
                     File.Move(files[i], newPaths[i]);
                 }
 
-                Console.WriteLine("Nazwy plików zostały zmienione na numery.");
+                Console.WriteLine("Files renamed.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Wystąpił błąd podczas zmiany nazw plików: {ex.Message}");
+                Console.WriteLine($"${ex.Message}");
             }
         }
         public static void resizeImages(string[] files, int width, int height, SmoothingMode smoothingQuality, InterpolationMode interpolationQuality, CompositingQuality compositingQuality)
@@ -45,20 +44,11 @@ namespace Bulk_Image_Resizer
             {
                 try
                 {
-                    // Sprawdzenie, czy plik istnieje
-                    if (!File.Exists(inputPath))
-                    {
-                        Console.WriteLine($"Plik nie istnieje: {inputPath}");
-                        continue;
-                    }
 
-                    // Ścieżki dla plików wynikowych
                     string directory = Path.GetDirectoryName(inputPath);
                     string filenameWithoutExt = Path.GetFileNameWithoutExtension(inputPath);
                     string extension = Path.GetExtension(inputPath);
                     string outputPath = Path.Combine(directory, $"{filenameWithoutExt}_resized{extension}");
-
-                    // Wczytanie obrazu i zmiana rozmiaru
                     using (Image image = Image.FromFile(inputPath))
                     using (Bitmap resizedImage = new Bitmap(width, height))
                     using (Graphics graphics = Graphics.FromImage(resizedImage))
@@ -73,7 +63,7 @@ namespace Bulk_Image_Resizer
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Błąd przetwarzania pliku {inputPath}: {ex.Message}");
+                    Console.WriteLine($"${ex.Message}");
                 }
             }
         }
